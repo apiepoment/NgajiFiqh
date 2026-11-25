@@ -1,0 +1,977 @@
+# **MASTER CONTEXT ENGINEERING — NgajiFiqih**
+
+
+
+Source Document Analyzed
+
+Product & UI/UX Blueprint
+
+
+
+Saya akan merancang **NgajiFiqih** sebagai platform pembelajaran ilmu fiqih digital yang mengambil pendekatan pengalaman belajar dari Ruangguru, tetapi memiliki identitas visual, karakter edukasi, dan struktur materi yang disesuaikan dengan tradisi pembelajaran kitab kuning.
+
+Konsep utamanya:
+
+> **NgajiFiqih — Belajar Fiqih Lebih Mudah, Terstruktur, dan Mendalam.**
+
+Aplikasi ini bukan sekadar PDF reader atau perpustakaan kitab digital. NgajiFiqih dirancang sebagai *Learning Management & Islamic Knowledge Platform*, tempat pengguna dapat mempelajari materi fiqih secara bertahap, membaca kitab, memahami penjelasan, mengerjakan latihan, dan memantau perkembangan belajar.
+
+# **1. Analisis sumber utama**
+
+[Jual Kitab Kuning Syarah Fathul Qorib Penerbit Nur Ilmu Kitab Pesantren Kitab Arab Gundul Kitab Kuning Di Seller Sbybookshoponline - Bulak, Kota Surabaya | Blibli](https://images.openai.com/static-rsc-4/cEWLkC4a_i0owQocuuaKsIPcxrykaRUKpWlBeI6gxsLY2XnkTPAEILni1UR3kc7mqvalyXAGkUK-imIncaq-UZyZScorndReE1MwEHnN5POUaW4RrkupgXRlK6bFyvLnljXXWZRzZ71gbzRHdWBEL26kfR3pFXCOR714yJjbwUM?purpose=inline)
+
+**Sumber materi utama**
+
+*Terjemah Kitab Fathul Qorib (Fath Al-Qarib)*
+
+- Syarah dari: Matan Taqrib Abu Syujak.
+- Pengarang: Muhammad bin Qasim bin Muhammad Al-Ghazi.
+- Penerbit versi digital: Pondok Pesantren Al-Khoirot Malang.
+- File sumber: 380 halaman.
+
+Fathul Qorib Terjemah.pdf
+
+### **Karakteristik materi kitab**
+
+Berdasarkan PDF yang kamu berikan, terdapat beberapa karakteristik penting yang harus menjadi dasar desain aplikasi.
+
+| Karakteristik           | Implementasi aplikasi                    |
+| ----------------------- | ---------------------------------------- |
+| Teks Arab               | Arabic reader dengan RTL                 |
+| Terjemahan Indonesia    | Terjemahan berdampingan dengan teks Arab |
+| Penjelasan atau syarah  | Materi penjelasan bertingkat             |
+| Pembagian kitab dan bab | Kurikulum dan navigasi bab               |
+| Istilah fiqih           | Glosarium istilah                        |
+| Catatan dan referensi   | Footnote dan referensi halaman           |
+
+Contoh materi yang ditemukan:
+
+- Halaman 5: Kitab Hukum-Hukum Thaharah, definisi thaharah dan pembagian air.
+- Halaman 124: Kitab Hukum-Hukum Berpuasa.
+- Halaman 251: Bab Talak.
+- Halaman 377: Bab Ummu Walad.
+
+
+
+Fathul Qorib Terjemah.pdf
+
+Fathul Qorib Terjemah.pdf
+
+Fathul Qorib Terjemah.pdf
+
+
+
+**Keputusan penting:** materi tidak boleh diubah menjadi rangkuman bebas yang menghilangkan struktur dan penjelasan kitab. Sistem harus mempertahankan hubungan antara teks Arab, terjemahan, penjelasan, istilah, dan sumber halaman aslinya.
+
+### **Struktur konten yang direkomendasikan**
+
+**KITAB FATHUL QORIB**
+
+Sumber utama pembelajaran
+
+**KITAB / BAGIAN**
+
+Contoh: Kitab Thaharah
+
+**BAB**
+
+Contoh: Pembagian Air
+
+**MATERI PEMBELAJARAN**
+
+Teks Arab, terjemahan, syarah, istilah
+
+**EVALUASI PEMBELAJARAN**
+
+Latihan soal, kuis, dan progres belajar
+
+# **2. Reference analysis — Ruangguru**
+
+[Bikin Belajar Makin Asik dengan Fitur Ruangbelajar by Ruangguru](https://images.openai.com/static-rsc-4/V6fY9tzVahKvZNzoYIV6An4Txauyf0NvXkJRp9AOhUifD_77VOlpppTmt78jlghkplvwrUsjPntBJwanlO9lNLoQbXk7rlB6vIJMCTZdLFU9LpjeBpgn3mBL_m2NLDdDfeWPkUQu6CrTzYXpZHQcPkMt_nc41boYFe8X2HL93qg?purpose=inline)
+
+**Visual reference: Ruangguru**
+
+[Buka Ruangguru App](https://app.ruangguru.com/?utm_source=chatgpt.com)
+
+Fokus adaptasi adalah pengalaman pengguna dan pola pembelajaran, bukan menyalin desain secara persis.
+
+Ruangguru menggabungkan video pembelajaran, latihan soal, rangkuman, dan aktivitas belajar dalam satu ekosistem. Pola tersebut cocok diadaptasi untuk NgajiFiqih.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://play.google.com\&sz=32)
+
+Aplikasi di Google Play+1
+
+
+
+### **Elemen yang diadaptasi**
+
+[Aplikasi Bimbel Online Interaktif Terbaik #1 Indonesia | Ruangguru](https://images.openai.com/static-rsc-4/yl2YTuw2N8bFQAgfMBJGh_75KfWhi2T4UY_kE1PMrCkDYNNUpMZYNbKrPy7mP9Ump5sSinGD7xWd3xJmE59TLbLT3_UPAjvxICx7GJNa5fm03uOq8lwzJLOZl7scNl2phiXyp5mfZ5YTETK_IKSvV1S3i4Z_EKqpbbc6J6j3_Bg?purpose=inline)
+
+**01. Learning Dashboard**
+
+Beranda personal, sapaan pengguna, rekomendasi materi, dan progres belajar.
+
+[4 Fitur Baru di Homepage Ruangguru, Belajar Makin Seru!](https://images.openai.com/static-rsc-4/6VHd7ozq7R8AoC2GU9FX4R_6ZQ4sms1BjvcaDLH9XTrBiZfFfEJrvCTRmWijNas9RDye18ksk9_lS4gEXYNMPBPRIoMweyduAIHWvb4SCzGqZyZhWhtuUL4ELMEbVF5nAVNVY4LYgOGHAII8Q3l8jvyD9SPI53pk7RUviTK_5sQ?purpose=inline)
+
+**02. Learning Categories**
+
+Kategori pembelajaran menggunakan kartu visual dengan ikon, warna, dan informasi progres.
+
+[Aplikasi Belajar Online Terlengkap untuk SD, SMP, & SMA](https://images.openai.com/static-rsc-4/hw96eccT8IJ8-G3YclqIFqCAu5ONvmQqfY7a2qTfhpark-n6LYPZlL5ykYZi98jmZ1aWBms-k8hEtJbpIZensPZds0OROrIktYiuS2kXtUnhPP6IsJsjpf8d19KfvByQYdGnDgW0ux637gkZv0LV0uWKkVm3RIRQoaAEmeueN7Y?purpose=inline)
+
+**03. Learning Experience**
+
+Materi tersusun per topik, memiliki navigasi sebelumnya dan berikutnya, serta indikator penyelesaian.
+
+[Siap TKA 2025 untuk SD, SMP, SMA, Biaya Lebih Hemat 40%](https://images.openai.com/static-rsc-4/K_Zn3hxNztVypHMWtFWcwRMl3PgLzXxSmXMOqha0dtAFv3fa2fBSlQosDdrVN5K9ewnh2al2NALD8o-_VwSFAURNul43RmdbU9EbcmZ80kHZzPqMdWzaSp6tj8LQYuOomRjZQjJWkE7ft--HKkxqLlGi8wlKhmbZS_0dJ0ep-fo?purpose=inline)
+
+**04. Interactive Assessment**
+
+Latihan soal, kuis, skor, pembahasan, dan evaluasi hasil belajar.
+
+### **Prinsip desain yang akan digunakan**
+
+- Friendly educational interface.
+- Modern card-based layout.
+- Rounded corners.
+- Soft background.
+- Colorful category illustrations.
+- Clear typography.
+- Progress visualization.
+- Responsive desktop dan mobile.
+
+Namun, NgajiFiqih harus tetap memiliki nuansa keislaman dan akademik. Jangan membuat tampilannya seperti aplikasi anak-anak.
+
+# **3. Brand identity & visual direction**
+
+# **NgajiFiqih**
+
+Belajar Fiqih Lebih Mudah, Terstruktur, dan Mendalam.
+
+[DENA Academy | Quran & Arabic Learning :: Behance](https://images.openai.com/static-rsc-4/Sr_YwaT8wae_O2EgzNr4b8zdRO2nR_REcYlqV6iP4uEKG29KxoPpEbNvVhM_BerMPEGW5LT_nUlWMNSJXXJqOEpQOLcqBmlg-7AeSDscgg9_tl4cbIrC9aDavSm1CteSwEou001UuOQeN9FJeTboCJp5hBSFf8gpMiC4B9BdVRE?purpose=inline)
+
+[behance.net](https://www.behance.net/gallery/249221407/DENA-Academy-Quran-Arabic-Learning?utm_source=chatgpt.com)
+
+### **Arah visual**
+
+Saya merekomendasikan gaya:
+
+**Modern Islamic EdTech — Friendly, Clean, Academic.**
+
+### **Color palette**
+
+Primary
+
+\#146C43
+
+Secondary
+
+\#1F9565
+
+Background
+
+\#F4F7F2
+
+Accent
+
+\#F0C978
+
+Text
+
+\#24352D
+
+| Token      | Warna         | Fungsi                   |
+| ---------- | ------------- | ------------------------ |
+| Primary    | Emerald Green | CTA, navigasi aktif      |
+| Secondary  | Green         | Elemen pendukung         |
+| Background | Off White     | Latar utama              |
+| Accent     | Soft Gold     | Highlight dan pencapaian |
+| Text       | Dark Charcoal | Teks utama               |
+
+### **Typography**
+
+- Heading: Plus Jakarta Sans.
+- Body: Inter.
+- Arabic: Amiri atau Noto Naskh Arabic.
+
+Teks Arab wajib memiliki dukungan RTL, harakat, ligatur, dan ukuran huruf yang nyaman dibaca.
+
+### **UI component style**
+
+- Card radius: 12–18px.
+- Button radius: 10–12px.
+- Shadow: soft shadow.
+- Spacing: sistem 8px.
+- Icon: Lucide Icons.
+- Illustration: minimal Islamic educational illustration.
+- Layout: responsive grid.
+
+# **4. Product specification — NgajiFiqih**
+
+## **4.1 Visi produk**
+
+Membangun platform pembelajaran fiqih digital yang membantu masyarakat mempelajari kitab-kitab fiqih secara sistematis, interaktif, dan mudah diakses.
+
+## **4.2 Target pengguna**
+
+| Pengguna        | Kebutuhan                                        |
+| --------------- | ------------------------------------------------ |
+| Santri          | Belajar kitab secara bertahap                    |
+| Pelajar         | Memahami dasar-dasar fiqih                       |
+| Mahasiswa       | Mempelajari materi secara lebih mendalam         |
+| Masyarakat umum | Memahami hukum fiqih dalam kehidupan sehari-hari |
+| Ustaz/Guru      | Mengarahkan dan memantau pembelajaran            |
+| Admin           | Mengelola materi, pengguna, dan sistem           |
+
+## **4.3 Fitur utama aplikasi**
+
+Saya membagi fitur menjadi enam modul utama.
+
+**01. Learning Dashboard**
+
+- Personal greeting.
+- Continue learning.
+- Progress pembelajaran.
+- Rekomendasi materi.
+- Aktivitas terakhir.
+- Target belajar harian.
+
+**02. Ngaji Library**
+
+- Daftar kitab.
+- Detail kitab.
+- Daftar bagian dan bab.
+- Pencarian materi.
+- Bookmark halaman.
+- Riwayat membaca.
+
+**03. Learning Center**
+
+- Materi pembelajaran.
+- Teks Arab dan terjemahan.
+- Penjelasan syarah.
+- Glosarium istilah.
+- Catatan belajar.
+- Materi yang sudah diselesaikan.
+
+**04. Quiz & Evaluation**
+
+- Pilihan ganda.
+- Benar dan salah.
+- Kuis per bab.
+- Pembahasan jawaban.
+- Nilai dan riwayat ujian.
+- Evaluasi pemahaman.
+
+**05. Learning Progress**
+
+- Persentase penyelesaian.
+- Jumlah materi selesai.
+- Statistik nilai kuis.
+- Aktivitas belajar.
+- Learning streak.
+- Pencapaian pengguna.
+
+**06. User & Admin Management**
+
+- Registrasi dan login.
+- Profil pengguna.
+- Role dan permission.
+- Manajemen kitab.
+- Manajemen materi.
+- Manajemen soal dan evaluasi.
+
+Catatan: fitur di atas merupakan rancangan produk, bukan klaim bahwa semuanya sudah tersedia di PDF sumber.
+
+# **5. Sitemap — Struktur halaman**
+
+Berikut struktur informasi yang direkomendasikan.
+
+**NgajiFiqih Platform**
+
+**Public Pages**
+
+Landing Page
+
+About NgajiFiqih
+
+Daftar Kitab
+
+Detail Kitab
+
+Login / Register
+
+**Student Dashboard**
+
+Beranda
+
+Koleksi Kitab
+
+Learning Center
+
+Quiz
+
+Progress
+
+Profil
+
+**Admin Dashboard**
+
+Overview & Analytics
+
+Manajemen Pengguna
+
+Manajemen Kitab
+
+Manajemen Bab
+
+Manajemen Materi
+
+Manajemen Soal
+
+Manajemen Kategori
+
+Manajemen Sistem
+
+### **Detail halaman student**
+
+| Halaman         | Komponen                              |
+| --------------- | ------------------------------------- |
+| Home            | Greeting, progress, continue learning |
+| Library         | Search, filter, book cards            |
+| Book Detail     | Deskripsi kitab, daftar bab           |
+| Chapter Detail  | Materi dan daftar topik               |
+| Learning Reader | Arab, terjemahan, syarah              |
+| Quiz            | Soal, pilihan jawaban, timer opsional |
+| Result          | Skor, jawaban, pembahasan             |
+| Progress        | Grafik dan riwayat belajar            |
+| Profile         | Informasi akun dan pengaturan         |
+
+### **Navigasi utama**
+
+Desktop menggunakan sidebar kiri:
+
+- Beranda
+- Koleksi Kitab
+- Pembelajaran
+- Latihan Soal
+- Progres Belajar
+- Profil
+
+Mobile menggunakan bottom navigation:
+
+- Home
+- Kitab
+- Belajar
+- Latihan
+- Profil
+
+# **6. UI/UX blueprint — High fidelity direction**
+
+Ini adalah gambaran komposisi antarmuka yang harus dibangun oleh AI design agent.
+
+## **6.1 Dashboard**
+
+[E-Learning Student Dashboard Design by Rahat Nur on Dribbble](https://images.openai.com/static-rsc-4/ETk2QUqKRDabYUOr0K-xijwWu5IPSDba5RqD9qIUGfr0IMkr8giZsbD18zPc8P3e-A0C8cB8Wau5mjwfUxOlWjFjkQ2k8cHtFgoDJlI7D2nGhmL0_CzcWrZFXCVPPbUNzEOMjuJQY6sIL3lXsrTqhjUJTANEcLv9sdlOHrW-Cj8?purpose=inline)
+
+[dribbble.com](https://dribbble.com/shots/25129825-E-Learning-Student-Dashboard-Design?utm_source=chatgpt.com)
+
+Komposisi:
+
+1. Sidebar navigasi.
+2. Header dengan search dan profil.
+3. Greeting: Assalamu'alaikum.
+4. Banner melanjutkan pembelajaran.
+5. Learning progress.
+6. Daftar kitab yang sedang dipelajari.
+7. Rekomendasi materi.
+8. Aktivitas terakhir.
+
+Contoh konten:
+
+- Assalamu'alaikum, Ahmad!
+- Mari lanjutkan perjalanan belajarmu.
+- Sedang dipelajari: Fathul Qorib.
+- Progress belajar: 35%.
+- Lanjutkan: Kitab Thaharah.
+
+## **6.2 Library / koleksi kitab**
+
+[Al-Kitab Online Academy Website by Rejoanul Haque on Dribbble](https://images.openai.com/static-rsc-4/wnvMNklf6Duln2H0sNO3hkRkAAq7uubeUYukWbqT2Vd7dfC70OBIpQLoV-RJH295pItrlIA-IhKpnAzvr3LFzqXC-rORxVV9SZjkcdjTJ1gTk4CvVhGb3J32yRKueItcoVYQZkHVqYlH0yU9I1HZg48gwuwDx5TxqC-MQzYk9G0?purpose=inline)
+
+[dribbble.com](https://dribbble.com/shots/26275812-Al-Kitab-Online-Academy-Website?utm_source=chatgpt.com)
+
+Komposisi:
+
+- Search kitab.
+- Filter kategori.
+- Featured book.
+- Grid koleksi kitab.
+- Informasi pengarang.
+- Deskripsi kitab.
+- Tombol mulai belajar.
+
+Untuk MVP, koleksi utama adalah Fathul Qorib. Jangan menampilkan kitab lain seolah-olah sudah memiliki konten apabila belum tersedia.
+
+## **6.3 Learning reader**
+
+[FastiQuran Update: Enhanced UI, Improved Search & New Default Theme | by Cahyanudien aziz “Wayang” Saputra | Feb, 2026 | Medium](https://images.openai.com/static-rsc-4/jx3WlyTn6reNqkTnnFeQFb0Y4yyAicjRggupg6EcyWWL9bXVTUfkU7xo3ZEd6-GXuRhywpBGIaiZOrRTqFssj1cOkLmy-euUsbZlVb518v0DPums882h_qK-pvkGy2vY1G718F6ty_nLLnTecdlPtN2-qDj9u4lBEp_QKLVxr0M?purpose=inline)
+
+[medium.com](https://medium.com/%40cas8398/fastiquran-update-enhanced-ui-improved-search-new-default-theme-d4da9d3f01b0?utm_source=chatgpt.com)
+
+Ini merupakan halaman terpenting NgajiFiqih.
+
+Saya merekomendasikan desain *split learning reader*.
+
+| Panel kiri     | Panel kanan           |
+| -------------- | --------------------- |
+| Daftar bab     | Teks pembelajaran     |
+| Navigasi topik | Teks Arab             |
+| Progress bab   | Terjemahan Indonesia  |
+| Bookmark       | Penjelasan syarah     |
+| Pencarian bab  | Catatan dan referensi |
+
+Fitur khusus:
+
+- Arabic text mode.
+- Translation mode.
+- Dual reading mode.
+- Pengaturan ukuran teks.
+- Bookmark.
+- Highlight.
+- Navigasi halaman.
+- Previous / Next Lesson.
+
+**Penting:** jangan menjadikan gambar halaman PDF sebagai satu-satunya format pembelajaran. Teks harus diolah menjadi konten terstruktur agar dapat dicari, dibaca, dan diakses dengan nyaman.
+
+## **6.4 Quiz & latihan soal**
+
+[NOViQ - Learning with AI](https://images.openai.com/static-rsc-4/Z6sCrHR0cvc7zKKc48qEIizb_CLfr674EMkq6YJwo_IC-SRwkcWsVByTUQBBzEVBphWNE9J4-5wSB-0Hdtygka0jf8GcYV-dnZpSjUmv_rexrEYOcq2Y6QspXIeyNRH5ihBF9M6TDcKkYLiIaZkgIJisCcTsUZ6tGOzrdGy7bJA?purpose=inline)
+
+[noviq.et](https://noviq.et/?utm_source=chatgpt.com)
+
+Komponen:
+
+- Judul materi.
+- Indikator nomor soal.
+- Progress pengerjaan.
+- Pertanyaan.
+- Pilihan jawaban.
+- Tombol selanjutnya.
+- Hasil akhir.
+- Pembahasan berdasarkan sumber.
+
+Soal harus dibuat dan diverifikasi oleh pengajar atau editor yang kompeten, bukan mengambil kesimpulan hukum secara otomatis dari teks tanpa validasi.
+
+## **6.5 Learning progress**
+
+[Student Dashboard | Elearning Dashboard | E-learning Platform by Gresi Donga on Dribbble](https://images.openai.com/static-rsc-4/GV9iMBwPIgS4e7glIGruc_m5CXJOcCv0EgdTP13WQScjuCzH4BsDO3Y_lGgW34XTKs1fAdMs_CseThPAwSR1iUi_Apq285fHmeAyJmWfDU4w2Y7DUhakkaPGQ6GKoPIJjB5PSXN9AFGZBweVYv3essC7IpA_QvJJ6Zvj0otfW3c?purpose=inline)
+
+[dribbble.com](https://dribbble.com/shots/24829172-Student-Dashboard-Elearning-Dashboard-E-learning-Platform?utm_source=chatgpt.com)
+
+Menampilkan:
+
+- Total materi dipelajari.
+- Materi selesai.
+- Nilai rata-rata.
+- Waktu belajar.
+- Grafik aktivitas mingguan.
+- Riwayat pembelajaran.
+
+# **7. Content engineering — Pengolahan Fathul Qorib**
+
+Bagian ini sangat penting karena kualitas aplikasi akan bergantung pada ketepatan pengolahan sumber kitab.
+
+## **7.1 Content ingestion pipeline**
+
+**Fathul Qorib Terjemah.pdf**
+
+380 halaman sumber
+
+**PDF Extraction & OCR**
+
+Ekstraksi teks Arab, Indonesia, tabel, dan halaman
+
+**Content Structuring**
+
+Kitab → Bab → Subbab → Materi
+
+**Editorial Validation**
+
+Verifikasi teks, harakat, terjemahan, dan referensi halaman
+
+**NgajiFiqih Learning Database**
+
+Konten siap digunakan dalam aplikasi
+
+### **7.2 Struktur data konten**
+
+Setiap materi harus memiliki informasi berikut:
+
+| Field               | Keterangan             |
+| ------------------- | ---------------------- |
+| book_id             | Identitas kitab        |
+| chapter_id          | Identitas bab          |
+| title               | Judul materi           |
+| arabic_text         | Teks Arab asli         |
+| translation         | Terjemahan Indonesia   |
+| explanation         | Penjelasan atau syarah |
+| source_page         | Halaman sumber PDF     |
+| sequence            | Urutan materi          |
+| verification_status | Status verifikasi      |
+
+Pisahkan teks Arab, terjemahan, dan penjelasan. Jangan menggabungkan semuanya ke satu kolom.
+
+### **7.3 Content integrity rules**
+
+1. Tidak boleh menghilangkan teks asli.
+2. Tidak boleh mengarang terjemahan.
+3. Tidak boleh mengubah pendapat fiqih tanpa dasar.
+4. Tidak boleh menghilangkan perbedaan pendapat yang tercantum.
+5. Setiap materi harus memiliki referensi halaman.
+6. Kesalahan OCR wajib dapat diperbaiki.
+7. Materi yang belum diverifikasi tidak boleh dipublikasikan sebagai materi final.
+8. Konten tambahan dari AI harus diberi label sebagai konten tambahan, bukan bagian dari teks kitab.
+
+### **7.4 Status konten**
+
+Draft
+
+Hasil ekstraksi awal.
+
+Review
+
+Menunggu pemeriksaan editor.
+
+Verified
+
+Sudah diverifikasi dan dapat dipublikasikan.
+
+Rejected
+
+Tidak layak dipublikasikan.
+
+# **8. Database engineering — Rancangan ERD**
+
+Struktur database awal yang saya rekomendasikan:
+
+\#chatgpt-mermaid-\_r_3pi\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_3pi\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_3pi\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_3pi\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_3pi\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_3pi\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_3pi\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_3pi\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_3pi\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_3pi\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_3pi\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_3pi\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_3pi\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_3pi\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_3pi\_ p{margin:0;}#chatgpt-mermaid-\_r_3pi\_ .entityBox{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_3pi\_ .relationshipLabelBox{fill:rgb(48, 48, 48);opacity:0.7;background-color:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_3pi\_ .relationshipLabelBox rect{opacity:0.5;}#chatgpt-mermaid-\_r_3pi\_ .labelBkg{background-color:rgba(48, 48, 48, 0.5);}#chatgpt-mermaid-\_r_3pi\_ .edgeLabel{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_3pi\_ .edgeLabel .label rect{fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_3pi\_ .edgeLabel .label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_3pi\_ .edgeLabel .label{fill:rgb(31, 78, 148);font-size:14px;}#chatgpt-mermaid-\_r_3pi\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_3pi\_ .edge-pattern-dashed{stroke-dasharray:8,8;}#chatgpt-mermaid-\_r_3pi\_ .node rect,#chatgpt-mermaid-\_r_3pi\_ .node circle,#chatgpt-mermaid-\_r_3pi\_ .node ellipse,#chatgpt-mermaid-\_r_3pi\_ .node polygon{fill:rgb(9, 23, 44);stroke:rgb(31, 78, 148);stroke-width:1px;}#chatgpt-mermaid-\_r_3pi\_ .relationshipLine{stroke:rgb(175, 175, 175);stroke-width:1px;fill:none;}#chatgpt-mermaid-\_r_3pi\_ .marker{fill:none!important;stroke:rgb(175, 175, 175)!important;stroke-width:1;}#chatgpt-mermaid-\_r_3pi\_ [data-look=neo].labelBkg{background-color:rgba(48, 48, 48, 0.5);}#chatgpt-mermaid-\_r_3pi\_ .node .neo-node{stroke:rgb(31, 78, 148);}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_3pi\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_3pi\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node .neo-line path{stroke:rgb(31, 78, 148);filter:none;}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_3pi\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_3pi\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_3pi\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_3pi\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_3pi\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI",Helvetica,"Apple Color Emoji",Arial,sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}USERSbigintidPKstringnamestringemailstringpasswordstringroleUSER_PROGRESSbigintidPKbigintuser_idFKbigintlesson_idFKstringstatusdatetimecompleted_atBOOKMARKSbigintidPKbigintuser_idFKbigintlesson_idFKQUIZ_ATTEMPTSbigintidPKbigintuser_idFKbigintquiz_idFKdecimalscoredatetimesubmitted_atBOOKSbigintidPKstringtitlestringauthortextdescriptionstringcoverstringstatusCHAPTERSbigintidPKbigintbook_idFKstringtitleintsequenceLESSONSbigintidPKbigintchapter_idFKstringtitleintsource_pageintsequencestringstatusLESSON_BLOCKSbigintidPKbigintlesson_idFKstringblock_typelongtextcontentintsequenceQUESTIONSbigintidPKbigintquiz_idFKtextquestionstringquestion_typeANSWER_OPTIONSbigintidPKbigintquestion_idFKtextoption_textbooleanis_correctQUIZZESbigintidPKbigintchapter_idFKstringtitleintpassing_scoreNOTESbigintidPKbigintuser_idFKbigintlesson_idFKtextcontenttrackssavestakescontainscontainscontainsassesseshascontainswritesreferencestracks
+
+Catatan: ERD ini merupakan rancangan awal. Implementasi perlu menambahkan audit log, permission, histori perubahan materi, dan penyimpanan jawaban setiap percobaan kuis.
+
+Untuk lesson blocks, gunakan tipe konten seperti:
+
+- `arabic`
+- `translation`
+- `explanation`
+- `quote`
+- `footnote`
+- `heading`
+- `image`
+
+Dengan pendekatan tersebut, satu halaman pembelajaran bisa memiliki berbagai jenis konten tanpa kehilangan urutan aslinya.
+
+# **9. Admin dashboard specification**
+
+[CRM Admin panel E-commerce :: Behance](https://images.openai.com/static-rsc-4/pIN0T3e5AbAUqNhyA6OUwX1nQ9mgpUFGPlc0NlYlbEHsHGy4OBnaU7p1DOJTrD091GaB2kfKGPQI2hx5-MsUYtZ9q7-I9LQzXm8LohJiUN45wEXeB6BMRkrpiawW2k9KzcrSLpGtS3udaUGAVW2L0GKjd0QgwQyTqoRcQeFwgYY?purpose=inline)
+
+[behance.net](https://www.behance.net/gallery/118841429/CRM-Admin-panel-E-commerce?utm_source=chatgpt.com)
+
+Admin dashboard berfungsi mengelola seluruh ekosistem pembelajaran.
+
+### **Menu admin**
+
+| Menu           | Fungsi              |
+| -------------- | ------------------- |
+| Dashboard      | Statistik aplikasi  |
+| Users          | Manajemen pengguna  |
+| Books          | Manajemen kitab     |
+| Chapters       | Manajemen bab       |
+| Lessons        | Manajemen materi    |
+| Content Review | Validasi konten     |
+| Quiz           | Manajemen evaluasi  |
+| Questions      | Bank soal           |
+| Reports        | Laporan belajar     |
+| Settings       | Pengaturan aplikasi |
+
+### **Role dan permission**
+
+| Role           | Hak akses                    |
+| -------------- | ---------------------------- |
+| Super Admin    | Seluruh sistem               |
+| Admin          | Manajemen aplikasi           |
+| Content Editor | Membuat dan mengedit konten  |
+| Reviewer/Ustaz | Memverifikasi materi         |
+| Student        | Belajar dan mengerjakan kuis |
+
+Penting: editor tidak otomatis memiliki kewenangan untuk menyetujui materi fiqih yang dibuatnya sendiri. Terapkan pemisahan tugas editorial dan verifikasi.
+
+# **10. Technical architecture**
+
+Karena kamu belum menentukan stack teknologi untuk NgajiFiqih, saya tidak akan mengunci framework secara sepihak.
+
+Arsitektur yang perlu disiapkan:
+
+| Layer             | Tanggung jawab                            |
+| ----------------- | ----------------------------------------- |
+| Frontend          | Student interface dan admin interface     |
+| Backend           | API, authentication, business logic       |
+| Database          | Data pengguna, kitab, materi, dan progres |
+| Storage           | PDF, gambar, cover kitab                  |
+| Content Engine    | Pengelolaan materi dan struktur kitab     |
+| Assessment Engine | Kuis, penilaian, dan pembahasan           |
+| Analytics         | Statistik pembelajaran                    |
+| Security          | RBAC, validasi, audit log                 |
+
+Persyaratan teknis:
+
+- Responsive desktop dan mobile.
+- SEO untuk halaman publik.
+- Optimasi performa pembacaan materi.
+- Database relasional.
+- Arabic RTL rendering.
+- Pencarian materi.
+- Proteksi data pengguna.
+- Backup database.
+- Versioning konten kitab.
+
+# **11. Development roadmap**
+
+Saya merekomendasikan pembangunan NgajiFiqih melalui enam tahap.
+
+1. **Stage 1 — Master Context Engineering**
+
+   Dirancang
+
+   Menentukan visi, sumber materi, identitas produk, fitur, dan prinsip sistem.
+2. **Stage 2 — Product Specification**
+
+   Finalisasi fitur, user journey, role, permission, dan kebutuhan sistem.
+3. **Stage 3 — Visual Reverse Engineering & UI/UX**
+   - Analisis referensi Ruangguru.
+   - Design system.
+   - Desktop wireframe.
+   - Mobile wireframe.
+   - High-fidelity design.
+   - Prototype.
+4. **Stage 4 — Technical Architecture**
+   - Database ERD.
+   - Backend architecture.
+   - Frontend architecture.
+   - API specification.
+   - Security architecture.
+5. **Stage 5 — AI Coding Agent Engineering**
+
+   Menyusun master prompt, coding rules, agent skills, dan workflow pengembangan.
+6. **Stage 6 — Development & Quality Assurance**
+   - Implementasi frontend.
+   - Implementasi backend.
+   - Content ingestion.
+   - Testing.
+   - Deployment.
+
+# **12. Master prompt untuk AI Agent**
+
+Berikut instruksi inti yang bisa digunakan untuk mengarahkan AI Agent ketika membangun NgajiFiqih.
+
+# MASTER AI AGENT CONTEXT — NGAJIFIQIH
+
+## 1. ROLE
+
+You are a Senior Product Architect, UI/UX Designer, Full-Stack Developer, EdTech Specialist, Islamic Knowledge Content Engineer, and AI Coding Agent.
+
+Your responsibility is to design and develop a professional Islamic Fiqh Learning Platform named **NgajiFiqih**.
+
+## 2. PRODUCT VISION
+
+NgajiFiqih is a digital Islamic learning platform designed to help users study classical Fiqh literature through structured lessons, Arabic texts, Indonesian translations, explanations, interactive quizzes, and learning progress.
+
+Core tagline:
+
+"Belajar Fiqih Lebih Mudah, Terstruktur, dan Mendalam."
+
+## 3. PRIMARY CONTENT SOURCE
+
+The primary learning source is:
+
+- Document: Fathul Qorib Terjemah.pdf
+- Original book: Fathul Qarib Al-Mujib fi Syarhi Alfazh Al-Taqrib.
+- Author: Muhammad bin Qasim Al-Ghazi.
+- Source: 380-page PDF provided by the project owner.
+- Language: Arabic and Indonesian.
+
+Preserve the original content structure, Arabic text, translation, explanations, terminology, and page references.
+
+Never fabricate religious content or attribute AI-generated explanations to the original author.
+
+All extracted content must support editorial review and verification before publication.
+
+## 4. DESIGN REFERENCE
+
+Primary reference:\
+[https://app.ruangguru.com/](https://app.ruangguru.com/)
+
+Adapt the following design principles:
+
+- Modern EdTech dashboard.
+- Friendly learning experience.
+- Card-based layout.
+- Clear visual hierarchy.
+- Structured learning navigation.
+- Interactive learning progress.
+- Responsive interface.
+
+Do not copy Ruangguru branding, logos, illustrations, or proprietary assets.
+
+## 5. VISUAL IDENTITY
+
+Design direction:\
+Modern Islamic EdTech.
+
+Color palette:
+
+- Primary: Emerald Green #146C43
+- Secondary: #1F9565
+- Background: #F4F7F2
+- Accent: Soft Gold #F0C978
+- Text: #24352D
+
+Typography:
+
+- Heading: Plus Jakarta Sans
+- Body: Inter
+- Arabic: Amiri / Noto Naskh Arabic
+
+UI principles:
+
+- Modern minimalism.
+- Rounded cards.
+- Soft shadows.
+- Consistent spacing.
+- Readable Arabic typography.
+- RTL support.
+- Responsive desktop/mobile.
+
+Avoid excessive decorative Islamic patterns and overly traditional interfaces.
+
+## 6. CORE MODULES
+
+1. Authentication & User Management.
+2. Student Learning Dashboard.
+3. Digital Book Library.
+4. Book and Chapter Management.
+5. Arabic & Indonesian Learning Reader.
+6. Content Management System.
+7. Quiz & Assessment Engine.
+8. Learning Progress Analytics.
+9. Bookmark & Personal Notes.
+10. Admin Dashboard.
+11. Content Review & Verification.
+
+## 7. CONTENT ARCHITECTURE
+
+Book → Chapter → Lesson → Lesson Blocks.
+
+Lesson block types:
+
+- Arabic Text.
+- Indonesian Translation.
+- Explanation.
+- Heading.
+- Footnote.
+- Quote.
+- Image.
+
+Every lesson must support source page references, ordering, verification status, and revision history.
+
+## 8. USER ROLES
+
+- Super Admin.
+- Admin.
+- Content Editor.
+- Reviewer / Ustaz.
+- Student.
+
+Implement role-based access control and separate content creation from content approval.
+
+## 9. DATABASE REQUIREMENTS
+
+Design relational database structures for:
+
+- Users.
+- Books.
+- Chapters.
+- Lessons.
+- Lesson Blocks.
+- Quizzes.
+- Questions.
+- Answer Options.
+- Quiz Attempts.
+- User Progress.
+- Bookmarks.
+- Notes.
+- Content Reviews.
+- Audit Logs.
+
+Implement appropriate foreign keys, indexes, constraints, and data validation.
+
+## 10. DEVELOPMENT PRINCIPLES
+
+- Maintain clean architecture.
+- Use reusable components.
+- Follow consistent naming conventions.
+- Apply secure authentication.
+- Implement authorization policies.
+- Validate all user inputs.
+- Maintain database integrity.
+- Use responsive design.
+- Optimize performance.
+- Write automated tests.
+- Maintain technical documentation.
+
+Do not assume unspecified product requirements. Ask for clarification when a decision materially affects architecture.
+
+## 11. QUALITY STANDARDS
+
+The final application must provide:
+
+- Professional EdTech UX.
+- Consistent visual design.
+- Accurate Arabic rendering.
+- Reliable content navigation.
+- Accurate source references.
+- Functional quiz system.
+- Reliable progress tracking.
+- Secure admin management.
+- Accessible mobile experience.
+- Maintainable codebase.
+
+## 12. EXECUTION RULES
+
+Work incrementally.
+
+Before implementing any major module:
+
+1. Analyze requirements.
+2. Inspect existing project structure.
+3. Define implementation plan.
+4. Identify dependencies.
+5. Implement the feature.
+6. Test functionality.
+7. Document changes.
+
+Never overwrite working functionality without understanding its dependencies.
+
+Never generate unverified fiqh rulings.
+
+Never publish extracted source material without editorial validation.
+
+## FINAL OBJECTIVE
+
+Build NgajiFiqih as a modern, professional, scalable Islamic Fiqh Learning Platform inspired by the learning experience of Ruangguru while maintaining the academic integrity and authenticity of classical Islamic Fiqh literature.
+
+# **13. Rekomendasi prioritas MVP**
+
+Jangan langsung membangun seluruh fitur. Mulailah dengan produk inti yang benar-benar bisa digunakan.
+
+**MVP — NgajiFiqih**
+
+Prioritas utama
+
+Checklist implementasi MVP
+
+# **9/9**
+
+**Login dan registrasi pengguna**
+
+Authentication
+
+**Student dashboard**
+
+Learning experience
+
+**Fathul Qorib library**
+
+Content
+
+**Daftar kitab dan bab**
+
+Content
+
+**Arabic + Indonesian reader**
+
+Core feature
+
+**Bookmark dan progress**
+
+Learning experience
+
+**Quiz per bab**
+
+Assessment
+
+**Admin CMS**
+
+Management
+
+**Content review**
+
+Quality control
+
+## **14. Keputusan desain akhir**
+
+Saya merekomendasikan tiga prinsip yang harus dipertahankan sepanjang pengembangan:
+
+1. **Experience seperti Ruangguru:** pengguna merasa sedang mengikuti proses pembelajaran, bukan hanya membaca dokumen.
+2. **Karakter seperti perpustakaan kitab digital:** identitas Fathul Qorib, teks Arab, terjemahan, dan syarah tetap menjadi inti.
+3. **Standar seperti platform pendidikan profesional:** ada kurikulum, evaluasi, progres, pengajar, dan pengelolaan konten.
+
+Dengan demikian, positioning NgajiFiqih adalah:
+
+**Platform EdTech Islam yang mengubah pengalaman belajar kitab fiqih menjadi lebih terstruktur, interaktif, dan mudah diakses.**
+
+## **15. Tahap selanjutnya**
+
+Sebelum masuk ke desain visual, ada tiga keputusan produk yang perlu ditentukan.
+
+**Finalisasi Product Specification NgajiFiqih**
+
+**1. Platform aplikasi**
+
+Web Application (Desktop + Mobile Responsive)
+
+Mobile Application (Android + iOS)
+
+Web + Mobile Application
+
+**2. Teknologi yang digunakan**
+
+Laravel 12 + MySQL + Blade
+
+Laravel 12 + MySQL + React
+
+Next.js + PostgreSQL
+
+Rekomendasikan teknologi terbaik
+
+**3. Model akses aplikasi**
+
+100% Gratis
+
+Freemium (Gratis + Premium)
+
+Berlangganan
+
+**4. Target pengguna utama**
+
+Masyarakat umum dan semua kalangan
+
+Santri dan pondok pesantren
+
+Pelajar dan mahasiswa
+
+Semua kalangan, termasuk pesantren dan lembaga pendidikan
+
+Finalisasi Stage 2&#x20;
+
+Setelah keputusan ini, kita bisa masuk ke Stage 2 dan kemudian Stage 3 untuk membangun desain NgajiFiqih secara langsung menggunakan AI Design Agent, tanpa harus menggambar setiap komponen secara manual di Figma.

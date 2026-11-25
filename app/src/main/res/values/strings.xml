@@ -1,0 +1,87 @@
+<resources>
+    <string name="app_name">NgajiFiqih</string>
+    <string name="tagline">Belajar Fiqih Lebih Mudah, Terstruktur, dan Mendalam.</string>
+    <string name="kitab_title">Fathul Qorib Al-Mujib</string>
+    <string name="kitab_subtitle">Syarah Matan At-Taqrib Abu Syujak</string>
+    <string name="kitab_author">Syaikh Muhammad bin Qasim Al-Ghazi</string>
+    <string name="kitab_publisher">Pondok Pesantren Al-Khoirot Malang (380 Halaman)</string>
+
+    <!-- Auth -->
+    <string name="auth_welcome_title">Selamat Datang di NgajiFiqih</string>
+    <string name="auth_welcome_subtitle">Platform belajar kitab kuning Fathul Qorib yang terstruktur dengan teks Arab, terjemah Indonesia, syarah bertingkat, dan evaluasi pemahaman.</string>
+    <string name="auth_sign_in_google">Masuk dengan Google</string>
+    <string name="auth_sign_in_hint">Masuk untuk menyimpan progres ngaji, bookmark halaman, catatan pribadi, dan riwayat kuis Anda secara aman di cloud.</string>
+    <string name="auth_cancelled_notice">Proses masuk dibatalkan. Silakan pilih akun Google Anda untuk melanjutkan.</string>
+
+    <!-- Bottom / Rail Navigation -->
+    <string name="nav_home">Beranda</string>
+    <string name="nav_library">Kitab</string>
+    <string name="nav_reader">Belajar</string>
+    <string name="nav_quiz">Latihan</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_greeting_prefix">Assalamu\'alaikum,</string>
+    <string name="dashboard_subtitle">Mari lanjutkan perjalanan ngaji fiqihmu hari ini.</string>
+    <string name="dashboard_continue_learning">Lanjutkan Belajar</string>
+    <string name="dashboard_daily_target">Target Harian</string>
+    <string name="dashboard_overall_progress">Progres Fathul Qorib</string>
+    <string name="dashboard_categories_title">Kategori Pembelajaran</string>
+    <string name="dashboard_recommended_title">Rekomendasi Materi</string>
+    <string name="dashboard_recent_title">Aktivitas Terakhir</string>
+
+    <!-- Library -->
+    <string name="library_title">Koleksi Kitab</string>
+    <string name="library_search_hint">Cari bab, materi, atau istilah fiqih…</string>
+    <string name="library_featured_badge">Kitab Utama</string>
+    <string name="library_start_learning">Mulai Belajar</string>
+    <string name="library_chapters_title">Daftar Kitab &amp; Bab</string>
+
+    <!-- Reader -->
+    <string name="reader_mode_dual">Berdampingan</string>
+    <string name="reader_mode_arabic">Teks Arab</string>
+    <string name="reader_mode_translation">Terjemahan</string>
+    <string name="reader_search_hint">Cari bab, istilah, atau teks Fathul Qorib…</string>
+    <string name="reader_layout_side_by_side">2 Kolom (Arab &amp; Terjemah)</string>
+    <string name="reader_layout_stacked">Susun Vertikal</string>
+    <string name="reader_text_size_label">Ukuran Teks</string>
+    <string name="reader_bookmark_text">Tandai Bacaan</string>
+    <string name="reader_bookmarked_text">Bacaan Tersimpan</string>
+    <string name="reader_bookmarks_list_title">Daftar Bookmark Kitab</string>
+    <string name="reader_resume_last_read">Lanjutkan Bacaan Terakhir</string>
+    <string name="reader_mark_complete">Tandai Selesai</string>
+    <string name="reader_completed_label">Materi Selesai</string>
+    <string name="reader_prev_lesson">Sebelumnya</string>
+    <string name="reader_next_lesson">Berikutnya</string>
+    <string name="reader_add_note">Tambah Catatan</string>
+    <string name="reader_glossary_title">Glosarium Istilah</string>
+    <string name="reader_design_title">Desain Mode Baca</string>
+
+    <!-- Quiz -->
+    <string name="quiz_title">Latihan Soal Fiqih</string>
+    <string name="quiz_subtitle">Uji pemahaman Anda berdasarkan nash Kitab Fathul Qorib</string>
+    <string name="quiz_start_button">Mulai Kuis</string>
+    <string name="quiz_submit_button">Selesai &amp; Nilai</string>
+    <string name="quiz_result_title">Hasil Evaluasi</string>
+    <string name="quiz_explanation_title">Pembahasan Sumber Kitab</string>
+
+    <!-- Profile & Progress -->
+    <string name="profile_progress_title">Progres &amp; Statistik Belajar</string>
+    <string name="profile_weekly_activity">Aktivitas Mingguan</string>
+    <string name="profile_bookmarks_notes">Bookmark &amp; Catatan</string>
+    <string name="profile_menu_title">Menu Profil &amp; Akun</string>
+    <string name="profile_edit_title">Edit Profil</string>
+    <string name="profile_change_photo">Ubah Foto Profil</string>
+    <string name="profile_remove_photo">Gunakan Inisial</string>
+    <string name="profile_settings_title">Pengaturan</string>
+    <string name="profile_cms_portal">Portal CMS &amp; Review Ustaz</string>
+    <string name="profile_sign_out">Keluar Akun (Logout)</string>
+    <string name="profile_logout_confirm_title">Keluar dari Akun?</string>
+    <string name="profile_logout_confirm_body">Progres belajar, bookmark, dan catatan pribadi Anda tetap tersimpan aman di Cloud Firestore. Anda dapat masuk kembali kapan saja dengan akun Google.</string>
+
+    <!-- Common -->
+    <string name="cd_hero_banner">Ilustrasi meja belajar kitab NgajiFiqih</string>
+    <string name="cd_book_cover">Sampul kitab Fathul Qorib</string>
+    <string name="cd_quiz_banner">Ilustrasi evaluasi belajar fiqih</string>
+    <string name="cd_empty_state">Ilustrasi catatan belajar kosong</string>
+</resources>

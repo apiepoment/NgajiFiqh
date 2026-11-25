@@ -1,0 +1,375 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered NgajiFiqih user profile, role, and daily learning goal metadata.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Authenticated Firebase UID matching the document ID."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name shown in greetings and editorial logs."
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address (private to owner and admin)."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["STUDENT", "CONTENT_EDITOR", "REVIEWER_USTAZ", "ADMIN", "SUPER_ADMIN"],
+          "description": "RBAC role governing learning and editorial permissions."
+        },
+        "dailyTargetMinutes": {
+          "type": "integer",
+          "description": "Daily study goal in minutes (5-240)."
+        },
+        "streakCount": {
+          "type": "integer",
+          "description": "Consecutive active learning days."
+        },
+        "studyMinutesToday": {
+          "type": "integer",
+          "description": "Accumulated study minutes recorded for the current day."
+        },
+        "lastStudyDate": {
+          "type": "string",
+          "description": "ISO local date (YYYY-MM-DD) of latest study activity."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was created (FieldValue.serverTimestamp())."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was updated (FieldValue.serverTimestamp())."
+        }
+      },
+      "required": ["userId", "displayName", "role", "dailyTargetMinutes", "streakCount", "studyMinutesToday", "createdAt", "updatedAt"]
+    },
+    "LessonProgress": {
+      "title": "LessonProgress",
+      "description": "Tracks user completion state, reading mode, and study time per Fathul Qorib lesson.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase UID."
+        },
+        "lessonId": {
+          "type": "string",
+          "description": "Identifier of the studied lesson."
+        },
+        "chapterId": {
+          "type": "string",
+          "description": "Parent chapter identifier."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["IN_PROGRESS", "COMPLETED"],
+          "description": "Completion state of the lesson."
+        },
+        "lastReadMode": {
+          "type": "string",
+          "enum": ["DUAL", "ARABIC", "TRANSLATION"],
+          "description": "Last reader mode selected for this lesson."
+        },
+        "studySeconds": {
+          "type": "integer",
+          "description": "Time spent studying this lesson in seconds."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional server timestamp when lesson was marked complete."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of initial progress record."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of latest progress update."
+        }
+      },
+      "required": ["userId", "lessonId", "chapterId", "status", "lastReadMode", "studySeconds", "createdAt", "updatedAt"]
+    },
+    "Bookmark": {
+      "title": "Bookmark",
+      "description": "Saved bookmark pointing to a specific Fathul Qorib lesson and source page.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase UID."
+        },
+        "lessonId": {
+          "type": "string",
+          "description": "Bookmarked lesson identifier."
+        },
+        "chapterId": {
+          "type": "string",
+          "description": "Parent chapter identifier."
+        },
+        "lessonTitle": {
+          "type": "string",
+          "description": "Title of the bookmarked lesson."
+        },
+        "chapterTitle": {
+          "type": "string",
+          "description": "Title of the parent chapter."
+        },
+        "sourcePage": {
+          "type": "integer",
+          "description": "Source page number in Fathul Qorib Terjemah.pdf."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when bookmark was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when bookmark was updated."
+        }
+      },
+      "required": ["userId", "lessonId", "chapterId", "lessonTitle", "chapterTitle", "sourcePage", "createdAt", "updatedAt"]
+    },
+    "StudyNote": {
+      "title": "StudyNote",
+      "description": "Personal study note or highlighted excerpt created by a student on a lesson.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase UID."
+        },
+        "lessonId": {
+          "type": "string",
+          "description": "Lesson identifier associated with this note."
+        },
+        "lessonTitle": {
+          "type": "string",
+          "description": "Title of the lesson."
+        },
+        "highlightText": {
+          "type": "string",
+          "description": "Optional highlighted excerpt from the lesson."
+        },
+        "content": {
+          "type": "string",
+          "description": "Personal reflection or study note text."
+        },
+        "sourcePage": {
+          "type": "integer",
+          "description": "Source page reference in PDF."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of note creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last note edit."
+        }
+      },
+      "required": ["userId", "lessonId", "lessonTitle", "content", "sourcePage", "createdAt", "updatedAt"]
+    },
+    "QuizAttempt": {
+      "title": "QuizAttempt",
+      "description": "Recorded chapter quiz attempt with score, pass state, and duration.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Student Firebase UID."
+        },
+        "quizId": {
+          "type": "string",
+          "description": "Quiz identifier."
+        },
+        "quizTitle": {
+          "type": "string",
+          "description": "Quiz title."
+        },
+        "chapterId": {
+          "type": "string",
+          "description": "Chapter identifier."
+        },
+        "score": {
+          "type": "integer",
+          "description": "Percentage score (0-100)."
+        },
+        "correctCount": {
+          "type": "integer",
+          "description": "Number of correct answers."
+        },
+        "totalQuestions": {
+          "type": "integer",
+          "description": "Total questions in the quiz."
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether score met the passing threshold."
+        },
+        "durationSeconds": {
+          "type": "integer",
+          "description": "Time spent completing the quiz in seconds."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of quiz submission."
+        }
+      },
+      "required": ["userId", "quizId", "quizTitle", "chapterId", "score", "correctCount", "totalQuestions", "passed", "durationSeconds", "createdAt"]
+    },
+    "EditorialSubmission": {
+      "title": "EditorialSubmission",
+      "description": "CMS draft and editorial review item enforcing separation between Content Editor and Reviewer/Ustaz.",
+      "type": "object",
+      "properties": {
+        "authorId": {
+          "type": "string",
+          "description": "UID of the editor who authored the submission."
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Display name of the editor."
+        },
+        "chapterId": {
+          "type": "string",
+          "description": "Target chapter identifier."
+        },
+        "chapterTitle": {
+          "type": "string",
+          "description": "Target chapter title."
+        },
+        "lessonTitle": {
+          "type": "string",
+          "description": "Proposed lesson title."
+        },
+        "arabicText": {
+          "type": "string",
+          "description": "Arabic matan/syarah text."
+        },
+        "translation": {
+          "type": "string",
+          "description": "Indonesian translation text."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "Structured syarah/pedagogical explanation."
+        },
+        "footnote": {
+          "type": "string",
+          "description": "Optional footnote or editorial note."
+        },
+        "sourcePage": {
+          "type": "integer",
+          "description": "Verified page reference in Fathul Qorib Terjemah.pdf (1-380)."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["DRAFT", "REVIEW", "VERIFIED", "REJECTED"],
+          "description": "Editorial workflow state."
+        },
+        "reviewerId": {
+          "type": "string",
+          "description": "UID of Reviewer/Ustaz who approved or rejected the submission (must differ from authorId)."
+        },
+        "reviewerName": {
+          "type": "string",
+          "description": "Display name of Reviewer/Ustaz."
+        },
+        "reviewNote": {
+          "type": "string",
+          "description": "Editorial verification feedback note."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last update."
+        }
+      },
+      "required": ["authorId", "authorName", "chapterId", "chapterTitle", "lessonTitle", "arabicText", "translation", "explanation", "sourcePage", "status", "createdAt", "updatedAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable audit trail for editorial submissions, reviews, and role updates.",
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "description": "UID of the user performing the action."
+        },
+        "actorName": {
+          "type": "string",
+          "description": "Display name of the actor."
+        },
+        "action": {
+          "type": "string",
+          "description": "Action label (e.g. CREATE_DRAFT, SUBMIT_REVIEW, APPROVE_CONTENT, REJECT_CONTENT, UPDATE_ROLE)."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Document ID of the affected entity."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Human-readable audit summary."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when audit event occurred."
+        }
+      },
+      "required": ["actorId", "actorName", "action", "targetId", "summary", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profiles, role assignments, and learning goals isolated by owner/admin."
+    },
+    "/users/{userId}/progress/{lessonId}": {
+      "schema": { "$ref": "#/entities/LessonProgress" },
+      "description": "Per-user lesson completion and reading time subcollection."
+    },
+    "/users/{userId}/bookmarks/{lessonId}": {
+      "schema": { "$ref": "#/entities/Bookmark" },
+      "description": "Per-user lesson bookmarks subcollection."
+    },
+    "/users/{userId}/notes/{noteId}": {
+      "schema": { "$ref": "#/entities/StudyNote" },
+      "description": "Per-user study notes and highlights subcollection."
+    },
+    "/users/{userId}/quizAttempts/{attemptId}": {
+      "schema": { "$ref": "#/entities/QuizAttempt" },
+      "description": "Per-user quiz attempt records subcollection."
+    },
+    "/editorialSubmissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/EditorialSubmission" },
+      "description": "CMS content drafts and Ustaz/Reviewer verification workflow."
+    },
+    "/auditLogs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Append-only editorial and RBAC audit trail."
+    }
+  }
+}

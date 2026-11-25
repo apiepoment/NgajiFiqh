@@ -1,0 +1,6 @@
+{
+  "name": "NgajiFiqih",
+  "description": "Platform pembelajaran kitab kuning Fathul Qorib terstruktur dengan teks Arab, terjemah Indonesia, syarah, kuis interaktif, dan analitik progres belajar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

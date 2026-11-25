@@ -1,0 +1,317 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global safety net: deny everything by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- GLOBAL HELPERS ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isBootstrappedAdmin() {
+      return isSignedIn() &&
+             ('email_verified' in request.auth.token) &&
+             request.auth.token.email_verified == true &&
+             ('email' in request.auth.token) &&
+             request.auth.token.email == 'apiepoment97@gmail.com';
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() || (
+        isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['ADMIN', 'SUPER_ADMIN']
+      );
+    }
+
+    function isReviewer() {
+      return isBootstrappedAdmin() || (
+        isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['REVIEWER_USTAZ', 'ADMIN', 'SUPER_ADMIN']
+      );
+    }
+
+    function isEditor() {
+      return isBootstrappedAdmin() || (
+        isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['CONTENT_EDITOR', 'REVIEWER_USTAZ', 'ADMIN', 'SUPER_ADMIN']
+      );
+    }
+
+    // --- VALIDATION HELPERS ---
+    function isValidUserProfile(data) {
+      return data.userId is string && data.userId.size() >= 1 && data.userId.size() <= 128 &&
+             data.displayName is string && data.displayName.size() >= 1 && data.displayName.size() <= 80 &&
+             (!('email' in data) || (data.email is string && data.email.size() <= 120)) &&
+             data.role in ['STUDENT', 'CONTENT_EDITOR', 'REVIEWER_USTAZ', 'ADMIN', 'SUPER_ADMIN'] &&
+             data.dailyTargetMinutes is int && data.dailyTargetMinutes >= 5 && data.dailyTargetMinutes <= 240 &&
+             data.streakCount is int && data.streakCount >= 0 && data.streakCount <= 3650 &&
+             data.studyMinutesToday is int && data.studyMinutesToday >= 0 && data.studyMinutesToday <= 1440 &&
+             (!('lastStudyDate' in data) || (data.lastStudyDate is string && data.lastStudyDate.size() <= 20)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidLessonProgress(data, userId, lessonId) {
+      return data.userId == userId &&
+             data.lessonId == lessonId &&
+             data.chapterId is string && data.chapterId.size() >= 1 && data.chapterId.size() <= 64 &&
+             data.status in ['IN_PROGRESS', 'COMPLETED'] &&
+             data.lastReadMode in ['DUAL', 'ARABIC', 'TRANSLATION'] &&
+             data.studySeconds is int && data.studySeconds >= 0 && data.studySeconds <= 86400 &&
+             (!('completedAt' in data) || (data.completedAt is timestamp && data.completedAt <= request.time)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidBookmark(data, userId, lessonId) {
+      return data.userId == userId &&
+             data.lessonId == lessonId &&
+             data.chapterId is string && data.chapterId.size() >= 1 && data.chapterId.size() <= 64 &&
+             data.lessonTitle is string && data.lessonTitle.size() >= 1 && data.lessonTitle.size() <= 160 &&
+             data.chapterTitle is string && data.chapterTitle.size() >= 1 && data.chapterTitle.size() <= 120 &&
+             data.sourcePage is int && data.sourcePage >= 1 && data.sourcePage <= 500 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidStudyNote(data, userId) {
+      return data.userId == userId &&
+             data.lessonId is string && data.lessonId.size() >= 1 && data.lessonId.size() <= 64 &&
+             data.lessonTitle is string && data.lessonTitle.size() >= 1 && data.lessonTitle.size() <= 160 &&
+             (!('highlightText' in data) || (data.highlightText is string && data.highlightText.size() <= 500)) &&
+             data.content is string && data.content.size() >= 1 && data.content.size() <= 2000 &&
+             data.sourcePage is int && data.sourcePage >= 1 && data.sourcePage <= 500 &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidQuizAttempt(data, userId) {
+      return data.userId == userId &&
+             data.quizId is string && data.quizId.size() >= 1 && data.quizId.size() <= 64 &&
+             data.quizTitle is string && data.quizTitle.size() >= 1 && data.quizTitle.size() <= 160 &&
+             data.chapterId is string && data.chapterId.size() >= 1 && data.chapterId.size() <= 64 &&
+             data.score is int && data.score >= 0 && data.score <= 100 &&
+             data.correctCount is int && data.correctCount >= 0 && data.correctCount <= 100 &&
+             data.totalQuestions is int && data.totalQuestions >= 1 && data.totalQuestions <= 100 &&
+             data.passed is bool &&
+             data.durationSeconds is int && data.durationSeconds >= 0 && data.durationSeconds <= 7200 &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    function isValidEditorialSubmission(data) {
+      return data.authorId is string && data.authorId.size() >= 1 && data.authorId.size() <= 128 &&
+             data.authorName is string && data.authorName.size() >= 1 && data.authorName.size() <= 80 &&
+             data.chapterId is string && data.chapterId.size() >= 1 && data.chapterId.size() <= 64 &&
+             data.chapterTitle is string && data.chapterTitle.size() >= 1 && data.chapterTitle.size() <= 120 &&
+             data.lessonTitle is string && data.lessonTitle.size() >= 3 && data.lessonTitle.size() <= 160 &&
+             data.arabicText is string && data.arabicText.size() >= 1 && data.arabicText.size() <= 4000 &&
+             data.translation is string && data.translation.size() >= 1 && data.translation.size() <= 4000 &&
+             data.explanation is string && data.explanation.size() >= 1 && data.explanation.size() <= 4000 &&
+             (!('footnote' in data) || (data.footnote is string && data.footnote.size() <= 1000)) &&
+             data.sourcePage is int && data.sourcePage >= 1 && data.sourcePage <= 380 &&
+             data.status in ['DRAFT', 'REVIEW', 'VERIFIED', 'REJECTED'] &&
+             (!('reviewerId' in data) || (data.reviewerId is string && data.reviewerId.size() <= 128)) &&
+             (!('reviewerName' in data) || (data.reviewerName is string && data.reviewerName.size() <= 80)) &&
+             (!('reviewNote' in data) || (data.reviewNote is string && data.reviewNote.size() <= 1000)) &&
+             data.createdAt is timestamp && data.createdAt <= request.time &&
+             data.updatedAt is timestamp && data.updatedAt <= request.time;
+    }
+
+    function isValidAuditLog(data) {
+      return data.actorId is string && data.actorId.size() >= 1 && data.actorId.size() <= 128 &&
+             data.actorName is string && data.actorName.size() >= 1 && data.actorName.size() <= 80 &&
+             data.action is string && data.action.size() >= 2 && data.action.size() <= 64 &&
+             data.targetId is string && data.targetId.size() >= 1 && data.targetId.size() <= 128 &&
+             data.summary is string && data.summary.size() >= 1 && data.summary.size() <= 300 &&
+             data.createdAt is timestamp && data.createdAt <= request.time;
+    }
+
+    // --- COLLECTIONS ---
+    match /users/{userId} {
+      allow get: if isSignedIn() && isValidId(userId) && (isOwner(userId) || isAdmin());
+      // No get()/exists() in allow list to avoid O(n) lookup cost; owner filters by userId, bootstrapped admin may list all
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isBootstrappedAdmin());
+
+      allow create: if isSignedIn() &&
+                       isValidId(userId) &&
+                       request.auth.uid == userId &&
+                       incoming().userId == request.auth.uid &&
+                       incoming().keys().hasAll(['userId', 'displayName', 'role', 'dailyTargetMinutes', 'streakCount', 'studyMinutesToday', 'createdAt', 'updatedAt']) &&
+                       incoming().keys().hasOnly(['userId', 'displayName', 'email', 'role', 'dailyTargetMinutes', 'streakCount', 'studyMinutesToday', 'lastStudyDate', 'createdAt', 'updatedAt']) &&
+                       isValidUserProfile(incoming()) &&
+                       (incoming().role == 'STUDENT' || isBootstrappedAdmin());
+
+      allow update: if isSignedIn() &&
+                       isValidId(userId) &&
+                       isValidUserProfile(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().createdAt == existing().createdAt &&
+                       (
+                         (isOwner(userId) &&
+                          incoming().role == existing().role &&
+                          incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'email', 'dailyTargetMinutes', 'streakCount', 'studyMinutesToday', 'lastStudyDate', 'updatedAt'])) ||
+                         (isAdmin() &&
+                          incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'role', 'dailyTargetMinutes', 'updatedAt']))
+                       );
+
+      allow delete: if isSignedIn() && isValidId(userId) && isOwner(userId);
+
+      // Subcollection: Lesson Progress
+      match /progress/{lessonId} {
+        allow get: if isOwner(userId) && isValidId(lessonId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) &&
+                         isValidId(lessonId) &&
+                         incoming().keys().hasAll(['userId', 'lessonId', 'chapterId', 'status', 'lastReadMode', 'studySeconds', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'lessonId', 'chapterId', 'status', 'lastReadMode', 'studySeconds', 'completedAt', 'createdAt', 'updatedAt']) &&
+                         isValidLessonProgress(incoming(), userId, lessonId);
+        allow update: if isOwner(userId) &&
+                         isValidId(lessonId) &&
+                         isValidLessonProgress(incoming(), userId, lessonId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().lessonId == existing().lessonId &&
+                         incoming().createdAt == existing().createdAt &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['chapterId', 'status', 'lastReadMode', 'studySeconds', 'completedAt', 'updatedAt']);
+        allow delete: if isOwner(userId) && isValidId(lessonId);
+      }
+
+      // Subcollection: Bookmarks
+      match /bookmarks/{lessonId} {
+        allow get: if isOwner(userId) && isValidId(lessonId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) &&
+                         isValidId(lessonId) &&
+                         incoming().keys().hasAll(['userId', 'lessonId', 'chapterId', 'lessonTitle', 'chapterTitle', 'sourcePage', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'lessonId', 'chapterId', 'lessonTitle', 'chapterTitle', 'sourcePage', 'createdAt', 'updatedAt']) &&
+                         isValidBookmark(incoming(), userId, lessonId);
+        allow update: if isOwner(userId) &&
+                         isValidId(lessonId) &&
+                         isValidBookmark(incoming(), userId, lessonId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().lessonId == existing().lessonId &&
+                         incoming().createdAt == existing().createdAt &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['chapterId', 'lessonTitle', 'chapterTitle', 'sourcePage', 'updatedAt']);
+        allow delete: if isOwner(userId) && isValidId(lessonId);
+      }
+
+      // Subcollection: Personal Study Notes
+      match /notes/{noteId} {
+        allow get: if isOwner(userId) && isValidId(noteId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) &&
+                         isValidId(noteId) &&
+                         incoming().keys().hasAll(['userId', 'lessonId', 'lessonTitle', 'content', 'sourcePage', 'createdAt', 'updatedAt']) &&
+                         incoming().keys().hasOnly(['userId', 'lessonId', 'lessonTitle', 'highlightText', 'content', 'sourcePage', 'createdAt', 'updatedAt']) &&
+                         isValidStudyNote(incoming(), userId);
+        allow update: if isOwner(userId) &&
+                         isValidId(noteId) &&
+                         isValidStudyNote(incoming(), userId) &&
+                         incoming().userId == existing().userId &&
+                         incoming().lessonId == existing().lessonId &&
+                         incoming().createdAt == existing().createdAt &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['lessonTitle', 'highlightText', 'content', 'sourcePage', 'updatedAt']);
+        allow delete: if isOwner(userId) && isValidId(noteId);
+      }
+
+      // Subcollection: Quiz Attempts
+      match /quizAttempts/{attemptId} {
+        allow get: if isOwner(userId) && isValidId(attemptId);
+        allow list: if isOwner(userId);
+        allow create: if isOwner(userId) &&
+                         isValidId(attemptId) &&
+                         incoming().keys().hasAll(['userId', 'quizId', 'quizTitle', 'chapterId', 'score', 'correctCount', 'totalQuestions', 'passed', 'durationSeconds', 'createdAt']) &&
+                         incoming().keys().hasOnly(['userId', 'quizId', 'quizTitle', 'chapterId', 'score', 'correctCount', 'totalQuestions', 'passed', 'durationSeconds', 'createdAt']) &&
+                         isValidQuizAttempt(incoming(), userId);
+        allow update, delete: if false;
+      }
+    }
+
+    // Editorial CMS & Ustaz Review Workflow (enforces editorial separation of duties)
+    match /editorialSubmissions/{submissionId} {
+      allow get: if isSignedIn() && isValidId(submissionId) && (
+        existing().status == 'VERIFIED' ||
+        existing().authorId == request.auth.uid ||
+        isReviewer()
+      );
+
+      // No get()/exists() inside allow list; client queries filter by status == 'VERIFIED', authorId == uid, or reviewerId == uid (bootstrapped admin can list queue)
+      allow list: if isSignedIn() && (
+        resource.data.status == 'VERIFIED' ||
+        resource.data.authorId == request.auth.uid ||
+        resource.data.reviewerId == request.auth.uid ||
+        isBootstrappedAdmin()
+      );
+
+      allow create: if isSignedIn() &&
+                       isValidId(submissionId) &&
+                       incoming().authorId == request.auth.uid &&
+                       incoming().status in ['DRAFT', 'REVIEW'] &&
+                       !('reviewerId' in incoming()) &&
+                       !('reviewerName' in incoming()) &&
+                       incoming().keys().hasAll(['authorId', 'authorName', 'chapterId', 'chapterTitle', 'lessonTitle', 'arabicText', 'translation', 'explanation', 'sourcePage', 'status', 'createdAt', 'updatedAt']) &&
+                       incoming().keys().hasOnly(['authorId', 'authorName', 'chapterId', 'chapterTitle', 'lessonTitle', 'arabicText', 'translation', 'explanation', 'footnote', 'sourcePage', 'status', 'reviewNote', 'createdAt', 'updatedAt']) &&
+                       isValidEditorialSubmission(incoming()) &&
+                       isEditor();
+
+      allow update: if isSignedIn() &&
+                       isValidId(submissionId) &&
+                       isValidEditorialSubmission(incoming()) &&
+                       incoming().authorId == existing().authorId &&
+                       incoming().createdAt == existing().createdAt &&
+                       (
+                         // Action 1: Author updates own draft/rejected submission or submits for review
+                         (existing().authorId == request.auth.uid &&
+                          existing().status in ['DRAFT', 'REJECTED'] &&
+                          incoming().status in ['DRAFT', 'REVIEW'] &&
+                          incoming().diff(existing()).affectedKeys().hasOnly(['chapterId', 'chapterTitle', 'lessonTitle', 'arabicText', 'translation', 'explanation', 'footnote', 'sourcePage', 'status', 'updatedAt'])) ||
+                         // Action 2: Reviewer/Ustaz approves or rejects a REVIEW submission authored by someone else (separation of duties)
+                         (isReviewer() &&
+                          existing().authorId != request.auth.uid &&
+                          existing().status == 'REVIEW' &&
+                          incoming().status in ['VERIFIED', 'REJECTED'] &&
+                          incoming().reviewerId == request.auth.uid &&
+                          incoming().diff(existing()).affectedKeys().hasOnly(['status', 'reviewerId', 'reviewerName', 'reviewNote', 'updatedAt']))
+                       );
+
+      allow delete: if isSignedIn() &&
+                       isValidId(submissionId) &&
+                       ((existing().authorId == request.auth.uid && existing().status in ['DRAFT', 'REJECTED']) || isAdmin());
+    }
+
+    // Immutable Audit Logs
+    match /auditLogs/{logId} {
+      allow get: if isSignedIn() && isValidId(logId) && (existing().actorId == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.actorId == request.auth.uid || isBootstrappedAdmin());
+      allow create: if isSignedIn() &&
+                       isValidId(logId) &&
+                       incoming().actorId == request.auth.uid &&
+                       incoming().keys().hasAll(['actorId', 'actorName', 'action', 'targetId', 'summary', 'createdAt']) &&
+                       incoming().keys().hasOnly(['actorId', 'actorName', 'action', 'targetId', 'summary', 'createdAt']) &&
+                       isValidAuditLog(incoming());
+      allow update, delete: if false;
+    }
+  }
+}
